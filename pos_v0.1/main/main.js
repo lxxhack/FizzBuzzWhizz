@@ -1,4 +1,5 @@
 'use strict';
+
 function stat(inputs)
 {
 var outputs=[];
@@ -6,17 +7,17 @@ var i=0,j=0;
 do 
 {
 outputs[j]=inputs[i];
-outputs[j].count=0;
+outputs[j].count=1;
 i++
-while (outputs[j].barcode==inputs[i]barcode&&i<inputs.length)
+while (i<inputs.length&&outputs[j].barcode==inputs[i].barcode)
 {
 outputs[j].count++;
 i++;
 }
-
+j++;
 }
 while(i<inputs.length);
-return inputs;
+return outputs;
 }
 
 function printReceipt(inputs) {
