@@ -8,12 +8,12 @@ function statistics(inputs) {
         count = 0;
         do
         {
-            if (inputs[i].charAt(10) == '-')
-                count += parseFloat(inputs[i].substring(11));
+            if (inputs[i].indexOf('-')!=-1)
+                count += parseFloat(inputs[i].split('-')[1]);
             else
                 count = count + 1;
             i++;
-            if (i < inputs.length && outputs[index].barcode == inputs[i].substring(0, 10))
+            if (i < inputs.length && outputs[index].barcode == inputs[i].split('-')[0])
                 continue;
             outputs[index].count = count;
             index++;
