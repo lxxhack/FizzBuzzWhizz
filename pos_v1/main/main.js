@@ -4,7 +4,7 @@ function statistics(inputs) {
     do
     {
         outputs[index] = {};
-        outputs[index].barcode = inputs[i].substring(0, 10);
+        outputs[index].barcode = inputs[i].split('-')[0];
         count = 0;
         do
         {
