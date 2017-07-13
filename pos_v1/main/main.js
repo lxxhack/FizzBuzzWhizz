@@ -8,7 +8,7 @@ function statistics(inputs) {
         count = 0;
         do
         {
-            if (inputs[i].indexOf('-')!=-1)
+            if (inputs[i].indexOf('-') != -1)
                 count += parseFloat(inputs[i].split('-')[1]);
             else
                 count = count + 1;
@@ -53,19 +53,40 @@ function getSave(input) {
     return save;
 }
 
+function buildOrder(inputs) {
+    var total = 0, save = 0;
+    for (var i = 0; i < inputs.length; i++) {
+        var total = inputs[i].price * inputs[i].count;
+        save = getSave(inputs[i]);
+        total -= save;
+        inputs[i].total = total;
+        inputs[i].save = save;
+    }
+    return inputs;
+}
+
+function getSum(inputs) {
+    var sum = 0;
+    for (var item of inputs)
+        sum += item.total;
+    return sum;
+}
+
+function getTotalSave(inputs) {
+    var total_save = 0;
+    for (var item of inputs)
+        total_save += item.save;
+    return total_save;
+}
 function printReceipt(inputs) {
     inputs = statistics(inputs);
     inputs = buildSheet(inputs);
-    var sum = 0;
-    var total_save = 0, save = 0;
+    inputs = buildOrder(inputs);
+    var sum = getSum(inputs);
+    var total_save = getTotalSave(inputs);
     var str = '***<没钱赚商店>收据***\n';
     for (var i = 0; i < inputs.length; i++) {
-        var count = inputs[i].price * inputs[i].count;
-        save = getSave(inputs[i]);
-        count -= save;
-        sum += count;
-        total_save += save;
-        str += `名称：${inputs[i].name}，数量：${inputs[i].count}${inputs[i].unit}，单价：${inputs[i].price.toFixed(2)}(元)，小计：${count.toFixed(2)}(元)\n`;
+        str += `名称：${inputs[i].name}，数量：${inputs[i].count}${inputs[i].unit}，单价：${inputs[i].price.toFixed(2)}(元)，小计：${inputs[i].total.toFixed(2)}(元)\n`;
     }
     str += `----------------------
 总计：${sum.toFixed(2)}(元)
