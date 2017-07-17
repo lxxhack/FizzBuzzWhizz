@@ -35,3 +35,18 @@ calcScore(1,2,3,4);
 // 返回"4A0B"
 // 系统给出"1234"，用户输入"4321"
 // 返回"0A4B"
+// function calcScore(L,args) {
+//     let A=0,B=0;
+//     for (let i of L)
+//     {
+//         if (args.indexOf(i)==L.indexOf(i))
+//         {
+//             A++;
+//         }
+//         else if(args.indexOf(i)!=-1)
+//         {
+//             B++;
+//         }
+//     }
+//     return `${A}A${B}B`;
+// }
